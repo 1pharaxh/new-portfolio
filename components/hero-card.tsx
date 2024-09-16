@@ -4,9 +4,7 @@ import React from "react";
 import { MagicCard } from "./magicui/magic-card";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
-type Props = {};
-
-const HeroCard = (props: Props) => {
+const HeroCard = () => {
   const { theme } = useTheme();
 
   return (
@@ -25,7 +23,7 @@ const HeroCard = (props: Props) => {
           </Avatar>
           <div className="flex flex-col items-center sm:items-start sm:text-left space-y-4">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-              Hi, I'm Akarshan 👋
+              Hi, I&apos;m Akarshan 👋
             </h2>
             <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
               Currently working at IBM and studying Computer Science at the

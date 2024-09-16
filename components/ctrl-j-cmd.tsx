@@ -1,12 +1,5 @@
 "use client";
-import {
-  Calculator,
-  Calendar,
-  CreditCard,
-  Smile,
-  User,
-  Home,
-} from "lucide-react";
+import { User, Home } from "lucide-react";
 import * as React from "react";
 import {
   CommandDialog,
@@ -16,7 +9,6 @@ import {
   CommandItem,
   CommandList,
   CommandSeparator,
-  CommandShortcut,
 } from "@/components/ui/command";
 import { useCtrlKey } from "@/hooks/UseCtrlKey";
 import { Button } from "./ui/button";
