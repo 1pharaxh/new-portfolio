@@ -6,6 +6,60 @@ export const DOCK_DATA = [
   { Icon: Laptop, tooltip: "Projects" },
 ];
 
+export const WORKEXP = [
+  {
+    title: "IBM Canada",
+    dates: "May 2024 - September 2025",
+    position: "SDE Intern",
+    description: ["Worked in IBM Security on Guardium Insights."],
+    image: "https://example.com/ibm-image.png",
+    techStack: [
+      "Java",
+      "Spring Boot",
+      "Docker",
+      "Kubernetes",
+      "Go Lang",
+      "gRPC",
+    ],
+  },
+  {
+    title: "Adewunmi Skincare",
+    dates: "May 2023 - April 2024",
+    position: "Full-Stack Developer Intern",
+    description: [
+      "Utilized Figma, React, Next.js, and TypeScript to design and develop UI elements, resulting in a 25% increase in the visual appeal and usability of the upcoming product. Applied Agile principles to ensure on-time delivery of high-quality products.",
+      "Successfully integrated Sanity CMS into the NextJs landing page, streamlining content management processes and reducing update times by 50%, leading to improved website performance and increased customer satisfaction.",
+      "Developed serverless functions using Google BigQuery SQL database, achieving 30% faster data retrieval and processing times, which significantly improved the overall user experience.",
+    ],
+    image: "https://example.com/adewunmi-image.png",
+    techStack: [
+      "Figma",
+      "React",
+      "Next.js",
+      "TypeScript",
+      "Sanity CMS",
+      "Google BigQuery",
+    ],
+  },
+  {
+    title: "GreyJay Energy",
+    dates: "June 2022 - August 2022",
+    position: "Software Developer Intern",
+    description: [
+      "Developed an Android app using Vue.js and Ionic Capacitor that visualizes energy usage and empowers users to make informed decisions, resulting in reduced energy consumption by end-users.",
+      "Conducted log-linear analysis on data using Python's Scikit-Learn (sklearn) library to make future predictions and used Vue.js and ChartJs to create UI chart components.",
+    ],
+    image: "https://example.com/greyjay-image.png",
+    techStack: [
+      "Vue.js",
+      "Ionic Capacitor",
+      "Python",
+      "Scikit-Learn",
+      "Chart.js",
+    ],
+  },
+];
+
 export const PROJECTS = [
   {
     title: "Study Mate",
