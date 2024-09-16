@@ -29,7 +29,7 @@ export default function Home() {
       </section>
 
       <section id="skills">
-        <div className="space-y-4 py-8">
+        <div className="space-y-4 py-12 pt-16">
           <BlurFade delay={BLUR_FADE_DELAY * 1}>
             <div className="flex flex-col items-center justify-center space-y-2 text-center">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">

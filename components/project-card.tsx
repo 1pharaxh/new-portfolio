@@ -11,7 +11,6 @@ import { useTheme } from "next-themes";
 import Link from "next/link";
 import Markdown from "react-markdown";
 import { MagicCard } from "./magicui/magic-card";
-import Image from "next/image";
 
 interface Props {
   title: string;
@@ -67,7 +66,7 @@ export function ProjectCard({
           />
         )}
         {image && (
-          <Image
+          <img
             src={image}
             alt={title}
             width={500}
