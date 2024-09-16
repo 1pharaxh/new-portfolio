@@ -1,18 +1,41 @@
 import { User, Building2, Laptop, Globe, Github } from "lucide-react";
 
 export const DOCK_DATA = [
-  { Icon: User, tooltip: "About me" },
-  { Icon: Building2, tooltip: "Work Experience" },
-  { Icon: Laptop, tooltip: "Projects" },
+  { Icon: User, tooltip: "About me", link: "#about-me" },
+  { Icon: Building2, tooltip: "Work Experience", link: "#work" },
+  { Icon: Laptop, tooltip: "Projects", link: "#projects" },
 ];
 
+export const SKILLS = [
+  "JavaScript",
+  "React",
+  "Node.js",
+  "CSS",
+  "HTML",
+  "TypeScript",
+  "Git",
+  "Docker",
+  "Kubernetes",
+  "Java",
+  "Spring Boot",
+  "Go Lang",
+  "OpenShift",
+  "gRPC",
+  "Python",
+  "SQL",
+  "NoSQL",
+  "MongoDB",
+  "PostgreSQL",
+  "Microservices",
+  "REST",
+];
 export const WORKEXP = [
   {
     title: "IBM Canada",
     dates: "May 2024 - September 2025",
     position: "SDE Intern",
     description: ["Worked in IBM Security on Guardium Insights."],
-    image: "https://example.com/ibm-image.png",
+    image: "/images/ibm.png",
     techStack: [
       "Java",
       "Spring Boot",
@@ -31,7 +54,7 @@ export const WORKEXP = [
       "Successfully integrated Sanity CMS into the NextJs landing page, streamlining content management processes and reducing update times by 50%, leading to improved website performance and increased customer satisfaction.",
       "Developed serverless functions using Google BigQuery SQL database, achieving 30% faster data retrieval and processing times, which significantly improved the overall user experience.",
     ],
-    image: "https://example.com/adewunmi-image.png",
+    image: "/images/adewunmi.png",
     techStack: [
       "Figma",
       "React",
@@ -49,7 +72,7 @@ export const WORKEXP = [
       "Developed an Android app using Vue.js and Ionic Capacitor that visualizes energy usage and empowers users to make informed decisions, resulting in reduced energy consumption by end-users.",
       "Conducted log-linear analysis on data using Python's Scikit-Learn (sklearn) library to make future predictions and used Vue.js and ChartJs to create UI chart components.",
     ],
-    image: "https://example.com/greyjay-image.png",
+    image: "/images/efficiate.png",
     techStack: [
       "Vue.js",
       "Ionic Capacitor",

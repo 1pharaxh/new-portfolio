@@ -17,6 +17,13 @@ import { DOCK_DATA } from "@/lib/constants";
 export default function BottomDock() {
   const { setTheme } = useTheme();
 
+  const handleScroll = (link: string) => {
+    const section = document.querySelector(link);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <TooltipProvider>
       <Dock
@@ -39,7 +46,7 @@ export default function BottomDock() {
             className="bg-black/10 dark:bg-white/10 p-1 md:p-3"
           >
             <Tooltip delayDuration={0}>
-              <TooltipTrigger asChild>
+              <TooltipTrigger onClick={() => handleScroll(item.link)} asChild>
                 <item.Icon className="md:size-full" />
               </TooltipTrigger>
               <TooltipContent>

@@ -3,9 +3,9 @@ import {
   Calculator,
   Calendar,
   CreditCard,
-  Settings,
   Smile,
   User,
+  Home,
 } from "lucide-react";
 import * as React from "react";
 import {
@@ -20,9 +20,17 @@ import {
 } from "@/components/ui/command";
 import { useCtrlKey } from "@/hooks/UseCtrlKey";
 import { Button } from "./ui/button";
+import { useRouter } from "next/navigation";
 
 const CtrlJCmd = () => {
   const [open, setOpen] = useCtrlKey({ keyCombination: "j" });
+  const router = useRouter();
+
+  const handleHomeClick = () => {
+    router.push("/");
+    setOpen(false);
+  };
+
   return (
     <>
       <Button
@@ -44,35 +52,16 @@ const CtrlJCmd = () => {
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandGroup heading="Suggestions">
-            <CommandItem>
-              <Calendar className="mr-2 h-4 w-4" />
-              <span>Calendar</span>
-            </CommandItem>
-            <CommandItem>
-              <Smile className="mr-2 h-4 w-4" />
-              <span>Search Emoji</span>
-            </CommandItem>
-            <CommandItem>
-              <Calculator className="mr-2 h-4 w-4" />
-              <span>Calculator</span>
+            <CommandItem onSelect={handleHomeClick}>
+              <Home className="mr-2 h-4 w-4" />
+              <span>Home</span>
             </CommandItem>
           </CommandGroup>
           <CommandSeparator />
-          <CommandGroup heading="Settings">
+          <CommandGroup heading="Blogs">
             <CommandItem>
               <User className="mr-2 h-4 w-4" />
-              <span>Profile</span>
-              <CommandShortcut>⌘P</CommandShortcut>
-            </CommandItem>
-            <CommandItem>
-              <CreditCard className="mr-2 h-4 w-4" />
-              <span>Billing</span>
-              <CommandShortcut>⌘B</CommandShortcut>
-            </CommandItem>
-            <CommandItem>
-              <Settings className="mr-2 h-4 w-4" />
-              <span>Settings</span>
-              <CommandShortcut>⌘S</CommandShortcut>
+              <span>Blogs coming soon</span>
             </CommandItem>
           </CommandGroup>
         </CommandList>
