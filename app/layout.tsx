@@ -36,9 +36,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="relative min-w-96 min-h-screen flex flex-col justify-center items-center">
+          <div className="relative w-full max-w-2xl m-auto p-8 min-h-screen flex flex-col justify-center items-center">
             {children}
-            <div className="fixed bottom-10 w-full">
+            <div className="fixed bottom-8 w-full">
               <BottomDock />
             </div>
           </div>

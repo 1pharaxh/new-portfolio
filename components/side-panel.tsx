@@ -15,7 +15,7 @@ import { Menu } from "lucide-react";
 export function SidePanel() {
   return (
     <Sheet>
-      <SheetTrigger asChild className="invisible md:visible">
+      <SheetTrigger asChild className="flex md:hidden">
         <Button variant="ghost" size="icon">
           <Menu />
         </Button>
