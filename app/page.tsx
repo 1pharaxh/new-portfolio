@@ -1,3 +1,6 @@
+import BlurFade from "@/components/magicui/blur-fade";
+import { ProjectCard } from "@/components/project-card";
+import { PROJECTS } from "@/lib/constants";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -15,19 +18,23 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      {Array.from({ length: 50 }, (_, index) => (
-        <p key={index} className="mb-4">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-          lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod
-          malesuada. Nulla facilisi. In sit amet massa at nulla placerat
-          tincidunt. Vivamus at felis vestibulum, facilisis erat ut, vehicula
-          nulla. Pellentesque habitant morbi tristique senectus et netus et
-          malesuada fames ac turpis egestas. Integer auctor, libero vel dapibus
-          feugiat, nunc risus bibendum massa, ac placerat dolor turpis ut eros.
-          Nulla consectetur orci eget magna varius, sed luctus lacus interdum.
-          Aliquam vel feugiat quam.
-        </p>
-      ))}
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 max-w-[800px] mx-auto">
+        {PROJECTS.map((project, id) => (
+          <BlurFade key={project.title} delay={0.04 * 12 + id * 0.05}>
+            <ProjectCard
+              href={project.href}
+              key={project.title}
+              title={project.title}
+              description={project.description}
+              dates={project.dates}
+              tags={project.technologies}
+              image={project.image}
+              video={project.video}
+              links={project.links}
+            />
+          </BlurFade>
+        ))}
+      </div>
     </>
   );
 }
