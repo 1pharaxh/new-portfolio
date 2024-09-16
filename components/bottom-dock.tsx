@@ -11,7 +11,7 @@ import * as React from "react";
 import CtrlJCmd from "@/components/ctrl-j-cmd";
 import { LucideIcon, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
-import { SidePanel } from "./side-panel";
+import { MobileNav } from "./mobile-nav";
 import { DOCK_DATA } from "@/lib/constants";
 
 export default function BottomDock() {
@@ -30,7 +30,7 @@ export default function BottomDock() {
         distance={100}
         direction="bottom"
       >
-        <SidePanel />
+        <MobileNav />
         <CtrlJCmd />
         <Separator orientation="vertical" className="h-full w-[1.5px]" />
         {DOCK_DATA.map((item, index) => (

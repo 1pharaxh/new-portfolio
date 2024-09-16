@@ -12,12 +12,41 @@ import {
 } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 
-export function SidePanel() {
+export function MobileNav() {
   return (
     <Sheet>
       <SheetTrigger asChild className="flex md:hidden">
         <Button variant="ghost" size="icon">
-          <Menu />
+          <svg
+            strokeWidth="1.5"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="size-5"
+          >
+            <path
+              d="M3 5H11"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            ></path>
+            <path
+              d="M3 12H16"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            ></path>
+            <path
+              d="M3 19H21"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            ></path>
+          </svg>
+          <span className="sr-only">Toggle Menu</span>
         </Button>
       </SheetTrigger>
       <SheetContent side="left">

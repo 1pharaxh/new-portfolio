@@ -1,3 +1,17 @@
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  openGraph: {
+    images: [
+      {
+        url: "http://localhost:3000/api/og?title=Home",
+        width: 1920,
+        height: 1080,
+        alt: "Home",
+      },
+    ],
+  },
+};
 export default function Home() {
   return (
     <>
