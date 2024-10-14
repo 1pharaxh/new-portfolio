@@ -19,7 +19,11 @@ export const metadata: Metadata = {
     ],
   },
 };
-export default function Home() {
+export default function Home({
+  searchParams,
+}: {
+  searchParams?: { [key: string]: string | string[] | undefined };
+}) {
   return (
     <>
       <section id="about-me">
