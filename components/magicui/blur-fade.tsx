@@ -37,25 +37,36 @@ const BlurFade = ({
     visible: { y: -yOffset, opacity: 1, filter: `blur(0px)` },
   };
   const combinedVariants = variant || defaultVariants;
-  return (
-    <AnimatePresence>
-      <motion.div
-        ref={ref}
-        initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
-        exit="hidden"
-        variants={combinedVariants}
-        transition={{
-          delay: 0.04 + delay,
-          duration,
-          ease: "easeOut",
-        }}
-        className={className}
-      >
-        {children}
-      </motion.div>
-    </AnimatePresence>
-  );
+
+  let hideDock = false;
+  if (typeof window !== "undefined") {
+    const pathName = window.location.search;
+    hideDock = pathName.includes("hideDock=true");
+  }
+
+  if (hideDock) {
+    return <>{children}</>;
+  } else {
+    return (
+      <AnimatePresence>
+        <motion.div
+          ref={ref}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          exit="hidden"
+          variants={combinedVariants}
+          transition={{
+            delay: 0.04 + delay,
+            duration,
+            ease: "easeOut",
+          }}
+          className={className}
+        >
+          {children}
+        </motion.div>
+      </AnimatePresence>
+    );
+  }
 };
 
 export default BlurFade;

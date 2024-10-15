@@ -28,7 +28,7 @@ export default function RootLayout({
 }>) {
   const headersList = headers();
   const header_url = headersList.get("x-url") || "";
-  console.log(header_url);
+  const hideDock = header_url.includes("hideDock=true") || false;
   return (
     <html lang="en">
       <body
@@ -42,9 +42,11 @@ export default function RootLayout({
         >
           <div className="relative w-full max-w-2xl m-auto p-8 min-h-screen flex flex-col justify-center items-center">
             {children}
-            <div className="fixed bottom-8 w-full">
-              <BottomDock />
-            </div>
+            {!hideDock && (
+              <div className="fixed bottom-8 w-full">
+                <BottomDock />
+              </div>
+            )}
           </div>
         </ThemeProvider>
       </body>

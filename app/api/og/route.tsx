@@ -10,13 +10,13 @@ const timeout = (ms: number) =>
 
 // Define a function to handle GET requests
 export async function GET(req: NextRequest) {
-  console.log(req);
   let browser;
   try {
     browser = await puppeteer.launch();
     const page = await browser.newPage();
-    await page.goto("http://localhost:3000");
-    await timeout(4000);
+    const baseUrl = req.nextUrl.origin;
+    await page.goto(`${baseUrl}/?hideDock=true`);
+    await timeout(500);
 
     const screenshot = await page.screenshot({ type: "png", fullPage: true });
 

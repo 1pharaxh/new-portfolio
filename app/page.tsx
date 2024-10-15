@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   openGraph: {
     images: [
       {
-        url: "/api/og?title=Home",
+        url: "/api/og",
         width: 1920,
         height: 1080,
         alt: "Home",
