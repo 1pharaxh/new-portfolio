@@ -4,6 +4,8 @@ import * as puppeteer from "puppeteer";
 import chromium from "@sparticuz/chromium";
 import puppeteerCore from "puppeteer-core";
 
+const viewPort = { width: 650, height: 500 };
+
 // Route segment config
 export const runtime = "nodejs";
 
@@ -14,6 +16,8 @@ const timeout = (ms: number) =>
 // Define a function to handle GET requests
 export async function GET(req: NextRequest) {
   let browser;
+
+  // Github cdn for minified chromium
   const browserPath = await chromium.executablePath(
     "https://github.com/Sparticuz/chromium/releases/download/v121.0.0/chromium-v121.0.0-pack.tar"
   );
@@ -21,13 +25,14 @@ export async function GET(req: NextRequest) {
     if (process.env.NODE_ENV === "development") {
       browser = await puppeteer.launch({
         args: ["--no-sandbox", "--disable-setuid-sandbox"],
+        defaultViewport: viewPort,
         headless: true,
       });
     }
     if (process.env.NODE_ENV === "production") {
       browser = await puppeteerCore.launch({
         args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
-        defaultViewport: chromium.defaultViewport,
+        defaultViewport: viewPort,
         executablePath: browserPath,
       });
     }
@@ -39,7 +44,7 @@ export async function GET(req: NextRequest) {
     await page.goto(`${baseUrl}/?hideDock=true`);
     await timeout(500);
 
-    const screenshot = await page.screenshot({ type: "png", fullPage: true });
+    const screenshot = await page.screenshot({ type: "png", fullPage: false });
 
     return new NextResponse(screenshot, {
       headers: {
