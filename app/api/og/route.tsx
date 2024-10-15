@@ -1,3 +1,6 @@
+
+export const maxDuration = 60; // This function can run for a maximum of 60 seconds
+export const dynamic = 'force-dynamic';
 // Import required modules and constants
 import { NextRequest, NextResponse } from "next/server";
 import chromium from "@sparticuz/chromium";
