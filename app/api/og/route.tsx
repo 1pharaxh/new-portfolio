@@ -10,6 +10,7 @@ const timeout = (ms: number) =>
 
 // Define a function to handle GET requests
 export async function GET(req: NextRequest) {
+  console.log(req);
   let browser;
   try {
     browser = await puppeteer.launch();
