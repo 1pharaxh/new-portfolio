@@ -1,6 +1,9 @@
 // Import required modules and constants
 import { NextRequest, NextResponse } from "next/server";
-import puppeteer from "puppeteer";
+import * as puppeteer from "puppeteer";
+import chromium from "@sparticuz/chromium";
+import puppeteerCore from "puppeteer-core";
+
 // Route segment config
 export const runtime = "nodejs";
 
@@ -12,7 +15,24 @@ const timeout = (ms: number) =>
 export async function GET(req: NextRequest) {
   let browser;
   try {
-    browser = await puppeteer.launch();
+    if (process.env.NODE_ENV === "development") {
+      browser = await puppeteer.launch({
+        args: ["--no-sandbox", "--disable-setuid-sandbox"],
+        headless: true,
+      });
+    }
+    if (process.env.NODE_ENV === "production") {
+      browser = await puppeteerCore.launch({
+        args: chromium.args,
+        defaultViewport: chromium.defaultViewport,
+        executablePath: await chromium.executablePath(),
+        headless: chromium.headless,
+      });
+    }
+    if (!browser) {
+      return new NextResponse("Fail to initialise browser", { status: 500 });
+
+    }
     const page = await browser.newPage();
     const baseUrl = req.nextUrl.origin;
     await page.goto(`${baseUrl}/?hideDock=true`);
