@@ -25,13 +25,14 @@ export async function GET(req: NextRequest) {
       browser = await puppeteerCore.launch({
         args: chromium.args,
         defaultViewport: chromium.defaultViewport,
-        executablePath: await chromium.executablePath(),
+        executablePath: await chromium.executablePath(
+          "https://github.com/Sparticuz/chromium/releases/download/v129.0.0/chromium-v129.0.0-pack.tar"
+        ),
         headless: chromium.headless,
       });
     }
     if (!browser) {
       return new NextResponse("Fail to initialise browser", { status: 500 });
-
     }
     const page = await browser.newPage();
     const baseUrl = req.nextUrl.origin;
