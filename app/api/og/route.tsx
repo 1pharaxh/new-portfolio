@@ -1,6 +1,5 @@
 // Import required modules and constants
 import { NextRequest, NextResponse } from "next/server";
-import * as puppeteer from "puppeteer";
 import chromium from "@sparticuz/chromium";
 import puppeteerCore from "puppeteer-core";
 
@@ -14,23 +13,15 @@ const timeout = (ms: number) =>
 // Define a function to handle GET requests
 export async function GET(req: NextRequest) {
   let browser;
+  const browserPath = await chromium.executablePath(
+    "https://github.com/Sparticuz/chromium/releases/download/v121.0.0/chromium-v121.0.0-pack.tar"
+  );
   try {
-    if (process.env.NODE_ENV === "development") {
-      browser = await puppeteer.launch({
-        args: ["--no-sandbox", "--disable-setuid-sandbox"],
-        headless: true,
-      });
-    }
-    if (process.env.NODE_ENV === "production") {
-      browser = await puppeteerCore.launch({
-        args: chromium.args,
-        defaultViewport: chromium.defaultViewport,
-        executablePath: await chromium.executablePath(
-          "https://github.com/Sparticuz/chromium/releases/download/v129.0.0/chromium-v129.0.0-pack.tar"
-        ),
-        headless: chromium.headless,
-      });
-    }
+    browser = await puppeteerCore.launch({
+      args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
+      defaultViewport: chromium.defaultViewport,
+      executablePath: browserPath,
+    });
     if (!browser) {
       return new NextResponse("Fail to initialise browser", { status: 500 });
     }
@@ -48,7 +39,7 @@ export async function GET(req: NextRequest) {
     });
   } catch (error) {
     console.error("An error occurred:", error);
-    return new NextResponse("An error occurred", { status: 500 });
+    return new NextResponse(error as string, { status: 500 });
   } finally {
     if (browser) {
       await browser.close();
