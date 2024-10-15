@@ -1,8 +1,6 @@
-
-export const maxDuration = 60; // This function can run for a maximum of 60 seconds
-export const dynamic = 'force-dynamic';
 // Import required modules and constants
 import { NextRequest, NextResponse } from "next/server";
+import * as puppeteer from "puppeteer";
 import chromium from "@sparticuz/chromium";
 import puppeteerCore from "puppeteer-core";
 
@@ -20,11 +18,19 @@ export async function GET(req: NextRequest) {
     "https://github.com/Sparticuz/chromium/releases/download/v121.0.0/chromium-v121.0.0-pack.tar"
   );
   try {
-    browser = await puppeteerCore.launch({
-      args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
-      defaultViewport: chromium.defaultViewport,
-      executablePath: browserPath,
-    });
+    if (process.env.NODE_ENV === "development") {
+      browser = await puppeteer.launch({
+        args: ["--no-sandbox", "--disable-setuid-sandbox"],
+        headless: true,
+      });
+    }
+    if (process.env.NODE_ENV === "production") {
+      browser = await puppeteerCore.launch({
+        args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
+        defaultViewport: chromium.defaultViewport,
+        executablePath: browserPath,
+      });
+    }
     if (!browser) {
       return new NextResponse("Fail to initialise browser", { status: 500 });
     }
@@ -42,7 +48,7 @@ export async function GET(req: NextRequest) {
     });
   } catch (error) {
     console.error("An error occurred:", error);
-    return new NextResponse(error as string, { status: 500 });
+    return new NextResponse("An error occurred", { status: 500 });
   } finally {
     if (browser) {
       await browser.close();
