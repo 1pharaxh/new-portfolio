@@ -1,7 +1,6 @@
 // Import required modules and constants
 import { NextRequest, NextResponse } from "next/server";
-const puppeteer = require("puppeteer");
-
+import puppeteer from "puppeteer";
 // Route segment config
 export const runtime = "nodejs";
 
@@ -16,7 +15,7 @@ export async function GET(req: NextRequest) {
     browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.goto("http://localhost:3000");
-    await timeout(2000);
+    await timeout(4000);
 
     const screenshot = await page.screenshot({ type: "png", fullPage: true });
 
