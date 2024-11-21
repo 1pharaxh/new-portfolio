@@ -12,13 +12,15 @@ export interface DockProps extends VariantProps<typeof dockVariants> {
   distance?: number;
   direction?: "top" | "middle" | "bottom";
   children: React.ReactNode;
+  isHovered: boolean;
+  setIsHovered: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const DEFAULT_MAGNIFICATION = 60;
 const DEFAULT_DISTANCE = 140;
 
 const dockVariants = cva(
-  "mx-auto w-max mt-8 h-[58px] p-2 flex gap-2 rounded-2xl border supports-backdrop-blur:bg-white/10 supports-backdrop-blur:dark:bg-black/10 backdrop-blur-md"
+  "mx-auto w-max mt-8 h-[58px] p-2 flex rounded-2xl border supports-backdrop-blur:bg-white/10 supports-backdrop-blur:dark:bg-black/10 backdrop-blur-md"
 );
 
 const Dock = React.forwardRef<HTMLDivElement, DockProps>(
@@ -29,17 +31,48 @@ const Dock = React.forwardRef<HTMLDivElement, DockProps>(
       magnification = DEFAULT_MAGNIFICATION,
       distance = DEFAULT_DISTANCE,
       direction = "bottom",
+      isHovered,
+      setIsHovered,
       ...props
     },
     ref
   ) => {
     const mouseX = useMotionValue(Infinity);
 
+    const containerVariants = {
+      initial: {
+        height: "40px",
+        scale: 0.9,
+        gap: "0px",
+      },
+      hover: {
+        height: "58px",
+        scale: 1,
+        gap: "8px",
+        alignItems:
+          direction === "top"
+            ? "flex-start"
+            : direction === "middle"
+            ? "center"
+            : "flex-end",
+      },
+      exit: {
+        height: "40px",
+        scale: 0.9,
+        gap: "0px",
+        transition: {
+          duration: 1.5,
+          ease: [0.32, 0.72, 0, 1], // Custom easing
+        },
+      },
+    };
+
     const renderChildren = () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       return React.Children.map(children, (child: any) => {
         return React.cloneElement(child, {
           mouseX: mouseX,
+          isHovered: isHovered,
           magnification: magnification,
           distance: distance,
         });
@@ -49,14 +82,24 @@ const Dock = React.forwardRef<HTMLDivElement, DockProps>(
     return (
       <motion.div
         ref={ref}
-        onMouseMove={(e) => mouseX.set(e.pageX)}
-        onMouseLeave={() => mouseX.set(Infinity)}
+        initial="initial"
+        whileHover="hover"
+        variants={containerVariants}
+        animate={isHovered ? "hover" : "exit"}
+        onMouseMove={(e) => {
+          mouseX.set(e.pageX);
+          setIsHovered(true);
+        }}
+        onMouseLeave={() => {
+          mouseX.set(Infinity);
+          // after mouse leave, set isHovered to false after 1s
+          setTimeout(() => {
+            setIsHovered(false);
+          }, 1000);
+        }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
         {...props}
-        className={cn(dockVariants({ className }), {
-          "items-start": direction === "top",
-          "items-center": direction === "middle",
-          "items-end": direction === "bottom",
-        })}
+        className={cn(dockVariants({ className }))}
       >
         {renderChildren()}
       </motion.div>
@@ -75,7 +118,12 @@ export interface DockIconProps {
   className?: string;
   children?: React.ReactNode;
   props?: PropsWithChildren;
+  isHovered?: boolean;
 }
+
+const defaultDockIconVariants = cva(
+  "hover:bg-black/10 hover:dark:bg-white/10 p-1 md:p-3"
+);
 
 const DockIcon = ({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -85,6 +133,7 @@ const DockIcon = ({
   mouseX,
   className,
   children,
+  isHovered,
   ...props
 }: DockIconProps) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -110,10 +159,10 @@ const DockIcon = ({
   return (
     <motion.div
       ref={ref}
-      style={{ width }}
+      style={isHovered ? { width } : {}}
       className={cn(
-        "flex aspect-square cursor-pointer items-center justify-center rounded-full",
-        className
+        defaultDockIconVariants({ className }),
+        "flex aspect-square cursor-pointer items-center justify-center rounded-full"
       )}
       {...props}
     >
@@ -124,4 +173,49 @@ const DockIcon = ({
 
 DockIcon.displayName = "DockIcon";
 
-export { Dock, DockIcon, dockVariants };
+export interface DockItemsRevealWrapperProps {
+  isHovered: boolean;
+  children: React.ReactNode;
+  extend?: boolean;
+  width?: string;
+  className?: string;
+}
+const DockItemsRevealWrapper: React.FC<DockItemsRevealWrapperProps> = ({
+  isHovered,
+  children,
+  extend,
+  width,
+  className,
+}) => {
+  return (
+    <motion.div
+      className={cn(className, "flex h-full")}
+      key="search-box"
+      initial={extend ? { opacity: 0, width: 0 } : { opacity: 0 }}
+      animate={
+        isHovered
+          ? extend
+            ? {
+                opacity: 1,
+                width: width,
+              }
+            : { opacity: 1 }
+          : extend
+          ? { opacity: 0, width: "0px" }
+          : { opacity: 0 }
+      }
+      style={{
+        ["--cmd-width" as string]:
+          // using clamp to set min and max width with a smoothing effect
+          "clamp(5rem, (100vw - 768px) * 0.1 + 5rem, 8rem)",
+      }}
+      transition={{ duration: 1.5, ease: [0.32, 0.72, 0, 1] }}
+    >
+      {children}
+    </motion.div>
+  );
+};
+
+DockItemsRevealWrapper.displayName = "DockItemsRevealWrapper";
+
+export { Dock, DockIcon, DockItemsRevealWrapper, dockVariants };

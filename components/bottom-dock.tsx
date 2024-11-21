@@ -1,5 +1,9 @@
 "use client";
-import { Dock, DockIcon } from "@/components/magicui/dock";
+import {
+  Dock,
+  DockIcon,
+  DockItemsRevealWrapper,
+} from "@/components/magicui/dock";
 import {
   Tooltip,
   TooltipProvider,
@@ -24,9 +28,13 @@ export default function BottomDock() {
     }
   };
 
+  const [isHovered, setIsHovered] = React.useState(false);
+
   return (
     <TooltipProvider>
       <Dock
+        isHovered={isHovered}
+        setIsHovered={setIsHovered}
         className="z-50 pointer-events-auto relative 
         mx-auto flex
         items-center bg-background 
@@ -37,14 +45,26 @@ export default function BottomDock() {
         distance={100}
         direction="bottom"
       >
-        <MobileNav />
-        <CtrlJCmd />
-        <Separator orientation="vertical" className="h-full w-[1.5px]" />
+        <DockItemsRevealWrapper
+          className="flex md:hidden"
+          width="36px"
+          extend
+          isHovered={isHovered}
+        >
+          <MobileNav />
+        </DockItemsRevealWrapper>
+        <DockItemsRevealWrapper
+          width="var(--cmd-width)"
+          extend
+          isHovered={isHovered}
+        >
+          <CtrlJCmd />
+        </DockItemsRevealWrapper>
+        <DockItemsRevealWrapper isHovered={isHovered}>
+          <Separator orientation="vertical" className="h-full w-[1.30px]" />
+        </DockItemsRevealWrapper>
         {DOCK_DATA.map((item, index) => (
-          <DockIcon
-            key={index}
-            className="bg-black/10 dark:bg-white/10 p-1 md:p-3"
-          >
+          <DockIcon key={index}>
             <Tooltip delayDuration={0}>
               <TooltipTrigger onClick={() => handleScroll(item.link)} asChild>
                 <item.Icon className="md:size-full" />
@@ -55,8 +75,10 @@ export default function BottomDock() {
             </Tooltip>
           </DockIcon>
         ))}
-        <Separator orientation="vertical" className="h-full" />
-        <DockIcon className="bg-black/10 dark:bg-white/10 p-1 md:p-3">
+        <DockItemsRevealWrapper isHovered={isHovered}>
+          <Separator orientation="vertical" className="h-full" />
+        </DockItemsRevealWrapper>
+        <DockIcon>
           <div className="relative size-6 md:size-full">
             <Tooltip delayDuration={500}>
               <TooltipTrigger asChild>

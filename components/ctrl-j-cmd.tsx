@@ -30,7 +30,7 @@ const CtrlJCmd = () => {
         onClick={() => {
           setOpen(true);
         }}
-        className="w-20 md:w-32 h-10 rounded-lg bg-black/10 dark:bg-white/10 justify-center flex items-center p-0 md:p-3"
+        className="w-full overflow-hidden h-10 rounded-lg bg-black/10 dark:bg-white/10 justify-center flex items-center p-0 md:p-3"
       >
         <p className="text-sm text-muted-foreground">
           Search...{" "}
