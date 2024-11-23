@@ -46,14 +46,6 @@ export default function BottomDock() {
         direction="bottom"
       >
         <DockItemsRevealWrapper
-          className="flex md:hidden"
-          width="36px"
-          extend
-          isHovered={isHovered}
-        >
-          <MobileNav />
-        </DockItemsRevealWrapper>
-        <DockItemsRevealWrapper
           width="var(--cmd-width)"
           extend
           isHovered={isHovered}
@@ -67,7 +59,9 @@ export default function BottomDock() {
           <DockIcon key={index}>
             <Tooltip delayDuration={0}>
               <TooltipTrigger onClick={() => handleScroll(item.link)} asChild>
-                <item.Icon className="md:size-full" />
+                <item.Icon
+                  className={` ${isHovered ? "size-full" : "size-4"}`}
+                />
               </TooltipTrigger>
               <TooltipContent>
                 <p>{item.tooltip}</p>
@@ -84,7 +78,7 @@ export default function BottomDock() {
               asChild
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
             >
-              <Sun className="md:size-full" />
+              <Sun className={` ${isHovered ? "size-full" : "size-4"}`} />
             </TooltipTrigger>
             <TooltipContent>
               <p>{theme === "dark" ? "Light Mode" : "Dark Mode"}</p>

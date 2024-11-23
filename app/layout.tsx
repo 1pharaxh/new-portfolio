@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import BottomDock from "@/components/bottom-dock";
 import { headers } from "next/headers";
 import React from "react";
+import { DistortedGlass } from "@/components/distorted-glass";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -42,6 +43,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <div className="relative w-full max-w-2xl m-auto p-8 min-h-screen flex flex-col justify-center items-center">
+            <div className="sticky top-0 z-50 w-full">
+              <DistortedGlass></DistortedGlass>
+            </div>
             {children}
             {!hideDock && (
               <div className="fixed bottom-8 w-full">

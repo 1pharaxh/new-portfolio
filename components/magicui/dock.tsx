@@ -56,6 +56,12 @@ const Dock = React.forwardRef<HTMLDivElement, DockProps>(
             ? "center"
             : "flex-end",
       },
+      transition: {
+        type: "spring",
+        mass: 0.1,
+        stiffness: 150,
+        damping: 12,
+      },
       exit: {
         height: "40px",
         scale: 0.9,
