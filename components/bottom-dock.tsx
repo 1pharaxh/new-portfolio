@@ -84,11 +84,7 @@ export default function BottomDock() {
               asChild
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
             >
-              {theme === "dark" ? (
-                <Sun className="md:size-full" />
-              ) : (
-                <Moon className="md:size-full" />
-              )}
+              <Sun className="md:size-full" />
             </TooltipTrigger>
             <TooltipContent>
               <p>{theme === "dark" ? "Light Mode" : "Dark Mode"}</p>

@@ -30,7 +30,7 @@ export default function RootLayout({
   const header_url = headersList.get("x-url") || "";
   const hideDock = header_url.includes("hideDock=true") || false;
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
