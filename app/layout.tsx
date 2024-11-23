@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import BottomDock from "@/components/bottom-dock";
 import { headers } from "next/headers";
+import React from "react";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",

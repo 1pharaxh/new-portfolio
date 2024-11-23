@@ -68,7 +68,6 @@ const Dock = React.forwardRef<HTMLDivElement, DockProps>(
     };
 
     const renderChildren = () => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       return React.Children.map(children, (child: any) => {
         return React.cloneElement(child, {
           mouseX: mouseX,
@@ -110,10 +109,8 @@ const Dock = React.forwardRef<HTMLDivElement, DockProps>(
 Dock.displayName = "Dock";
 
 export interface DockIconProps {
-  size?: number;
   magnification?: number;
   distance?: number;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   mouseX?: any;
   className?: string;
   children?: React.ReactNode;
@@ -126,8 +123,6 @@ const defaultDockIconVariants = cva(
 );
 
 const DockIcon = ({
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  size,
   magnification = DEFAULT_MAGNIFICATION,
   distance = DEFAULT_DISTANCE,
   mouseX,

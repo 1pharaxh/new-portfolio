@@ -11,6 +11,7 @@ import { useTheme } from "next-themes";
 import Link from "next/link";
 import Markdown from "react-markdown";
 import { MagicCard } from "./magicui/magic-card";
+import React from "react";
 
 interface Props {
   title: string;
