@@ -19,7 +19,7 @@ import { MobileNav } from "./mobile-nav";
 import { DOCK_DATA } from "@/lib/constants";
 
 export default function BottomDock() {
-  const { setTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
 
   const handleScroll = (link: string) => {
     const section = document.querySelector(link);
@@ -79,30 +79,21 @@ export default function BottomDock() {
           <Separator orientation="vertical" className="h-full" />
         </DockItemsRevealWrapper>
         <DockIcon>
-          <div className="relative size-6 md:size-full">
-            <Tooltip delayDuration={500}>
-              <TooltipTrigger asChild>
-                <Moon
-                  onClick={() => setTheme("dark")}
-                  className="absolute inset-0 md:size-full rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
-                />
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Dark Mode</p>
-              </TooltipContent>
-            </Tooltip>
-            <Tooltip delayDuration={500}>
-              <TooltipTrigger asChild>
-                <Sun
-                  onClick={() => setTheme("light")}
-                  className="absolute inset-0 md:size-full rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"
-                />
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Light Mode</p>
-              </TooltipContent>
-            </Tooltip>
-          </div>
+          <Tooltip delayDuration={0}>
+            <TooltipTrigger
+              asChild
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            >
+              {theme === "dark" ? (
+                <Sun className="md:size-full" />
+              ) : (
+                <Moon className="md:size-full" />
+              )}
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>{theme === "dark" ? "Light Mode" : "Dark Mode"}</p>
+            </TooltipContent>
+          </Tooltip>
         </DockIcon>
       </Dock>
     </TooltipProvider>
