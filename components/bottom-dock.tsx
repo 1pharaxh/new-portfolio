@@ -14,7 +14,6 @@ import { Separator } from "@/components/ui/separator";
 import * as React from "react";
 import CtrlJCmd from "@/components/ctrl-j-cmd";
 import { useTheme } from "next-themes";
-import { MobileNav } from "./mobile-nav";
 import { DOCK_DATA } from "@/lib/constants";
 import { Sun } from "lucide-react";
 
