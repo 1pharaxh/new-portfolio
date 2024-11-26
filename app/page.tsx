@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 };
 export default function Home() {
   return (
-    <>
+    <main className="my-20 sm:my-8">
       <section id="about-me">
         <BlurFade delay={BLUR_FADE_DELAY * 1}>
           <HeroCard />
@@ -29,22 +29,20 @@ export default function Home() {
       </section>
 
       <section id="skills">
-        <div className="space-y-4 py-12 pt-16">
+        <div className="mt-16 space-y-4">
           <BlurFade delay={BLUR_FADE_DELAY * 1}>
-            <div className="flex flex-col items-center justify-center space-y-2 text-center">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                Skills
-              </h2>
-              <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                Here are some of the skills I have acquired over my career,
-                showcasing my expertise in various technologies and tools.
-              </p>
-            </div>
+            <h2 className="font-semibold">Skills</h2>
+            <p className="text-muted-foreground text-sm lowercase">
+              Here are some of the skills I have acquired over my career,
+              showcasing my expertise in various technologies and tools.
+            </p>
           </BlurFade>
           <div className="flex flex-wrap justify-center gap-2">
             {SKILLS.map((skill, idx) => (
               <BlurFade key={skill} delay={BLUR_FADE_DELAY * 2 + idx * 0.05}>
-                <Badge variant="outline">{skill}</Badge>
+                <Badge variant="outline" className="text-[10px]">
+                  {skill}
+                </Badge>
               </BlurFade>
             ))}
           </div>
@@ -52,17 +50,13 @@ export default function Home() {
       </section>
 
       <section id="work">
-        <div className="space-y-12 py-12">
+        <div className="mt-16 space-y-4">
           <BlurFade delay={BLUR_FADE_DELAY * 3}>
-            <div className="flex flex-col items-center justify-center space-y-2 text-center">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                Work Experience
-              </h2>
-              <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                Here are some of my professional experiences, showcasing my
-                journey and contributions in various roles.
-              </p>
-            </div>
+            <h2 className="font-semibold">Work Experience</h2>
+            <p className="text-muted-foreground text-sm lowercase">
+              Here are some of my professional experiences, showcasing my
+              journey and contributions in various roles.
+            </p>
           </BlurFade>
           <ul className="mb-4 ml-4 divide-y divide-dashed border-l">
             {WORKEXP.map((work, index) => (
@@ -85,19 +79,15 @@ export default function Home() {
       </section>
 
       <section id="projects">
-        <div className="space-y-12 py-12">
+        <div className="mt-16 space-y-4">
           <BlurFade delay={BLUR_FADE_DELAY * 5}>
-            <div className="flex flex-col items-center justify-center space-y-2 text-center">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                Explore my recent projects
-              </h2>
-              <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                I&apos;ve created a range of projects, from basic websites to
-                intricate web applications. Here are some of my top picks.
-              </p>
-            </div>
+            <h2 className="font-semibold">Explore my recent projects</h2>
+            <p className="text-muted-foreground text-sm lowercase">
+              I&apos;ve created a range of projects, from basic websites to
+              intricate web applications. Here are some of my top picks.
+            </p>
           </BlurFade>
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 mx-auto">
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-2 mx-auto">
             {PROJECTS.map((project, index) => (
               <BlurFade
                 key={project.title}
@@ -119,6 +109,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-    </>
+    </main>
   );
 }
