@@ -208,7 +208,7 @@ const DockItemsRevealWrapper: React.FC<DockItemsRevealWrapperProps> = ({
       style={{
         ["--cmd-width" as string]:
           // using clamp to set min and max width with a smoothing effect
-          "clamp(5rem, (100vw - 768px) * 0.1 + 5rem, 8rem)",
+          "clamp(7rem, (100vw - 768px) * 0.1 + 5rem, 8rem)",
       }}
       transition={{ duration: 1.5, ease: [0.32, 0.72, 0, 1] }}
     >
