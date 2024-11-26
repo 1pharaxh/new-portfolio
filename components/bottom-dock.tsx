@@ -59,7 +59,9 @@ export default function BottomDock() {
             <Tooltip delayDuration={0}>
               <TooltipTrigger onClick={() => handleScroll(item.link)} asChild>
                 <item.Icon
-                  className={` ${isHovered ? "size-full" : "size-4"}`}
+                  className={` ${
+                    isHovered ? "md:size-full" : "md:size-4 size-5"
+                  }`}
                 />
               </TooltipTrigger>
               <TooltipContent>
@@ -77,7 +79,11 @@ export default function BottomDock() {
               asChild
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
             >
-              <Sun className={` ${isHovered ? "size-full" : "size-4"}`} />
+              <Sun
+                className={` ${
+                  isHovered ? "md:size-full" : "md:size-4 size-5"
+                }`}
+              />
             </TooltipTrigger>
             <TooltipContent>
               <p>{theme === "dark" ? "Light Mode" : "Dark Mode"}</p>

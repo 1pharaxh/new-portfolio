@@ -42,8 +42,8 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="relative w-full max-w-2xl m-auto p-8 min-h-screen flex flex-col justify-center items-center">
-            <div className="sticky top-0 z-50 w-full">
+          <div className="relative w-full max-w-md m-auto px-3 min-h-screen flex flex-col justify-center items-center ">
+            <div className="sticky top-0 z-50 w-full hidden md:flex ">
               <DistortedGlass></DistortedGlass>
             </div>
             {children}

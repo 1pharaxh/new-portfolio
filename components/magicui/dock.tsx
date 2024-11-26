@@ -163,7 +163,7 @@ const DockIcon = ({
       style={isHovered ? { width } : {}}
       className={cn(
         defaultDockIconVariants({ className }),
-        "flex aspect-square cursor-pointer items-center justify-center rounded-full"
+        "flex aspect-square cursor-pointer items-center justify-center rounded-full min-h-10"
       )}
       {...props}
     >
