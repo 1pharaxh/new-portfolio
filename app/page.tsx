@@ -25,7 +25,7 @@ export default function Home() {
   const header_url = headersList.get("x-url") || "";
   const hideDock = header_url.includes("hideDock=true") || false;
   return (
-    <main className={!hideDock ? "my-20 sm:my-8" : ""}>
+    <main className={!hideDock ? "my-20 sm:my-8" : "my-20"}>
       <section id="about-me">
         <BlurFade delay={BLUR_FADE_DELAY * 1}>
           <HeroCard />
