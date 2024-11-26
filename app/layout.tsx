@@ -43,9 +43,11 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <div className="relative w-full max-w-[30rem] m-auto px-3 min-h-screen flex flex-col justify-center items-center ">
-            <div className="sticky top-0 z-50 w-full hidden sm:flex ">
-              <DistortedGlass></DistortedGlass>
-            </div>
+            {!hideDock && (
+              <div className="sticky top-0 z-50 w-full hidden sm:flex ">
+                <DistortedGlass></DistortedGlass>
+              </div>
+            )}
             {children}
             {!hideDock && (
               <div className="fixed bottom-8 w-full">

@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { WorkCard } from "@/components/work-card";
 import { PROJECTS, SKILLS, WORKEXP } from "@/lib/constants";
 import { Metadata } from "next";
+import { headers } from "next/headers";
 const BLUR_FADE_DELAY = 0.04;
 
 export const metadata: Metadata = {
@@ -20,8 +21,11 @@ export const metadata: Metadata = {
   },
 };
 export default function Home() {
+  const headersList = headers();
+  const header_url = headersList.get("x-url") || "";
+  const hideDock = header_url.includes("hideDock=true") || false;
   return (
-    <main className="my-20 sm:my-8">
+    <main className={!hideDock ? "my-20 sm:my-8" : ""}>
       <section id="about-me">
         <BlurFade delay={BLUR_FADE_DELAY * 1}>
           <HeroCard />
