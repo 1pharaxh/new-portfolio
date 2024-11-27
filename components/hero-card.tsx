@@ -1,17 +1,43 @@
-"use client";
-import React from "react";
+// app/HeroCard.tsx
+import React, { Suspense } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-
-// Mock data for the current playing song
-const currentSong = {
-  title: "Blinding Lights",
-  artist: "The Weeknd",
-  album: "After Hours",
-  coverUrl: "https://i.scdn.co/image/ab67616d0000b2738863bc11d2aa12b54f5aeb36",
-  isPlaying: true,
-};
 import Link from "next/link";
 import { Badge } from "./ui/badge";
+import { getLastPlayedTrack } from "@/lib/actions";
+
+const SpotifyTab = async () => {
+  const spotifyData = await getLastPlayedTrack();
+  return (
+    <div className="bg-border/40 relative rounded-md py-4 px-4 flex items-center mt-8 mb-4">
+      <div className="rounded-full bg-green-400 h-[8px] w-[8px] inline-block mr-2"></div>
+      <div className="absolute animate-ping rounded-full bg-green-400 h-[8px] w-[8px] mr-2"></div>
+      <div className=" text-xs lowercase">
+        <span className="text-muted-foreground">Currently listening to </span>
+        <Link
+          className="hover:underline underline-offset-2 font-semibold"
+          href={spotifyData.track.external_urls.spotify}
+        >
+          {spotifyData.track.name}
+        </Link>
+        <span className="text-muted-foreground"> by </span>{" "}
+        <Link
+          href={spotifyData.track.artists[0].external_urls.spotify}
+          className="hover:underline underline-offset-2 font-semibold"
+        >
+          {spotifyData.track.artists[0].name}
+        </Link>
+        <span className="text-muted-foreground"> on </span>{" "}
+        <Badge
+          className="inline-flex items-center border rounded-full"
+          variant="outline"
+        >
+          Spotify
+        </Badge>
+      </div>
+    </div>
+  );
+};
+
 const HeroCard = () => {
   return (
     <div className="mt-4">
@@ -40,20 +66,9 @@ const HeroCard = () => {
           </Link>
           .
         </p>
-
-        <div className="bg-border/40 relative rounded-md py-4 px-4 flex items-center mt-8 mb-4">
-          <div className="rounded-full bg-green-400 h-[8px] w-[8px] inline-block mr-2"></div>
-          <div className="absolute animate-ping rounded-full bg-green-400 h-[8px] w-[8px] mr-2"></div>
-          <div className="text-muted-foreground text-xs lowercase">
-            Currently listening to XYZ by XYZ on {currentSong.isPlaying}
-            <Badge
-              className="inline-flex items-center border rounded-full"
-              variant="outline"
-            >
-              Spotify
-            </Badge>
-          </div>
-        </div>
+        <Suspense fallback={<div>Loading...</div>}>
+          <SpotifyTab />
+        </Suspense>
       </div>
     </div>
   );

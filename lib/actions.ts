@@ -1,5 +1,8 @@
 "server only";
-export const getAccessToken = async () => {
+
+import { revalidatePath } from "next/cache";
+
+export async function getAccessToken() {
   try {
     const refresh_token = process.env.SPOTIFY_REFRESH_TOKEN;
     if (!refresh_token) {
@@ -23,9 +26,9 @@ export const getAccessToken = async () => {
   } catch (error) {
     throw new Error(`An error occurred: ${error}`);
   }
-};
+}
 
-export const getLastPlayedTrack = async () => {
+export async function getLastPlayedTrack() {
   try {
     const { access_token } = await getAccessToken().catch((error) => {
       throw new Error(`An error occurred: ${error}`);
@@ -39,8 +42,9 @@ export const getLastPlayedTrack = async () => {
       }
     );
     const data = await res.json();
+    revalidatePath("/");
     return data.items[0];
   } catch (error) {
     throw new Error(`An error occurred: ${error}`);
   }
-};
+}
