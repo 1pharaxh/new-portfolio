@@ -29,6 +29,7 @@ const getAccessToken = async () => {
 // Define a function to handle GET requests
 export async function GET(req: NextRequest) {
   try {
+    console.log(req);
     const { access_token } = await getAccessToken().catch((error) => {
       console.error("An error occurred:", error);
       return new NextResponse("An error occurred", { status: 500 });
