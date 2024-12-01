@@ -34,7 +34,7 @@ export default function Home() {
 
       <section id="skills">
         <div className="mt-16 space-y-4">
-          <BlurFade delay={BLUR_FADE_DELAY * 1}>
+          <BlurFade delay={BLUR_FADE_DELAY * 2}>
             <h2 className="font-semibold">Skills</h2>
             <p className="text-muted-foreground text-sm lowercase">
               Here are some of the skills I have acquired over my career,
@@ -43,7 +43,7 @@ export default function Home() {
           </BlurFade>
           <div className="flex flex-wrap justify-center gap-2">
             {SKILLS.map((skill, idx) => (
-              <BlurFade key={skill} delay={BLUR_FADE_DELAY * 2 + idx * 0.05}>
+              <BlurFade key={skill} delay={BLUR_FADE_DELAY * 3 + idx * 0.05}>
                 <Badge variant="outline" className="text-[10px]">
                   {skill}
                 </Badge>
@@ -55,7 +55,7 @@ export default function Home() {
 
       <section id="work">
         <div className="mt-16 space-y-4">
-          <BlurFade delay={BLUR_FADE_DELAY * 3}>
+          <BlurFade delay={BLUR_FADE_DELAY * 4}>
             <h2 className="font-semibold">Work Experience</h2>
             <p className="text-muted-foreground text-sm lowercase">
               Here are some of my professional experiences, showcasing my
@@ -66,7 +66,7 @@ export default function Home() {
             {WORKEXP.map((work, index) => (
               <BlurFade
                 key={work.title + work.dates}
-                delay={BLUR_FADE_DELAY * 4 + index * 0.05}
+                delay={BLUR_FADE_DELAY * 5 + index * 0.05}
               >
                 <WorkCard
                   title={work.title}
@@ -84,7 +84,7 @@ export default function Home() {
 
       <section id="projects">
         <div className="mt-16 space-y-4">
-          <BlurFade delay={BLUR_FADE_DELAY * 5}>
+          <BlurFade delay={BLUR_FADE_DELAY * 6}>
             <h2 className="font-semibold">Explore my recent projects</h2>
             <p className="text-muted-foreground text-sm lowercase">
               I&apos;ve created a range of projects, from basic websites to
@@ -95,7 +95,7 @@ export default function Home() {
             {PROJECTS.map((project, index) => (
               <BlurFade
                 key={project.title}
-                delay={BLUR_FADE_DELAY * 6 + index * 0.05}
+                delay={BLUR_FADE_DELAY * 7 + index * 0.05}
               >
                 <ProjectCard
                   href={project.href}

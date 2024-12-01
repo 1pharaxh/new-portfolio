@@ -1,5 +1,5 @@
 "use client";
-import { User, Home } from "lucide-react";
+import { User, Home, FileIcon } from "lucide-react";
 import * as React from "react";
 import {
   CommandDialog,
@@ -12,16 +12,10 @@ import {
 } from "@/components/ui/command";
 import { useCtrlKey } from "@/hooks/UseCtrlKey";
 import { Button } from "./ui/button";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const CtrlJCmd = () => {
   const [open, setOpen] = useCtrlKey({ keyCombination: "k" });
-  const router = useRouter();
-
-  const handleHomeClick = () => {
-    router.push("/");
-    setOpen(false);
-  };
 
   return (
     <>
@@ -44,9 +38,24 @@ const CtrlJCmd = () => {
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandGroup heading="Suggestions">
-            <CommandItem onSelect={handleHomeClick}>
-              <Home className="mr-2 h-4 w-4" />
-              <span>Home</span>
+            <CommandItem>
+              <Link href="/" className={"flex items-center"}>
+                <Home className="mr-2 h-4 w-4" />
+                Home
+              </Link>
+            </CommandItem>
+
+            <CommandItem>
+              <Link
+                href="/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                download="resume.pdf" // Added download attribute
+                className={"flex items-center w-full"}
+              >
+                <FileIcon className="mr-2 h-4 w-4" />
+                Resume
+              </Link>
             </CommandItem>
           </CommandGroup>
           <CommandSeparator />
