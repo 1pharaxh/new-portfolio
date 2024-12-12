@@ -1,4 +1,4 @@
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 import React, { Suspense } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
@@ -8,86 +8,8 @@ import { buttonVariants } from "./ui/button";
 import { cn } from "@/lib/utils";
 import { FileIcon, GlobeIcon } from "lucide-react";
 import BlurFade from "./magicui/blur-fade";
+import SpotifyStreaming from "./spotify-streaming";
 const BLUR_FADE_DELAY = 0.04;
-
-export const LoadingSpinner = ({ className }: { className?: string }) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className={cn("animate-spin", className)}
-  >
-    <path d="M21 12a9 9 0 1 1-6.219-8.56" />
-  </svg>
-);
-
-const SpotifyTab = async () => {
-  const [statusCurrentlyPlaying, currentlyPlaying] =
-    await getCurrentlyPlaying();
-
-  const [, lastPlaying] = await getLastPlayedTrack();
-
-  let songPlayedUrl, artistPlayedUrl, songPlayedName, artistPlayedName;
-  if (statusCurrentlyPlaying === 200 || statusCurrentlyPlaying === 204) {
-    songPlayedUrl = currentlyPlaying.external_urls.spotify;
-    artistPlayedUrl = currentlyPlaying.artists[0].external_urls.spotify;
-    songPlayedName = currentlyPlaying.name;
-    artistPlayedName = currentlyPlaying.artists[0].name;
-  } else {
-    songPlayedUrl = lastPlaying.track.external_urls.spotify;
-    artistPlayedUrl = lastPlaying.track.artists[0].external_urls.spotify;
-    songPlayedName = lastPlaying.track.name;
-    artistPlayedName = lastPlaying.track.artists[0].name;
-  }
-
-  return (
-    <div className="bg-border/40 relative rounded-md py-4 px-4 flex items-center mt-8 mb-4">
-      <div
-        className={`rounded-full 
-
-          ${
-            statusCurrentlyPlaying === 200 || statusCurrentlyPlaying === 204
-              ? "bg-green-400"
-              : "bg-amber-400"
-          }
-          h-[8px] w-[8px] inline-block mr-2`}
-      ></div>
-      <div
-        className={`absolute animate-ping rounded-full  ${
-          statusCurrentlyPlaying === 200 || statusCurrentlyPlaying === 204
-            ? "bg-green-400"
-            : "bg-amber-400"
-        } h-[8px] w-[8px] mr-2`}
-      ></div>
-      <div className=" text-xs lowercase">
-        <span className="text-muted-foreground">
-          {statusCurrentlyPlaying === 200 || statusCurrentlyPlaying === 204
-            ? "Currently listening to"
-            : "Was listening to"}{" "}
-        </span>
-        <Link
-          className="hover:underline underline-offset-2 font-semibold"
-          href={songPlayedUrl}
-        >
-          {songPlayedName}
-        </Link>
-        <span className="text-muted-foreground"> by </span>{" "}
-        <Link
-          href={artistPlayedUrl}
-          className="hover:underline underline-offset-2 font-semibold"
-        >
-          {artistPlayedName}
-        </Link>
-      </div>
-    </div>
-  );
-};
 
 const HeroCard = () => {
   return (
@@ -201,16 +123,9 @@ const HeroCard = () => {
           </Link>
           .
         </p>
-        <Suspense
-          fallback={
-            <div className="text-muted-foreground text-xs flex gap-1">
-              <LoadingSpinner className="size-4 " />
-              Loading...
-            </div>
-          }
-        >
-          <SpotifyTab />
-        </Suspense>
+        <BlurFade delay={BLUR_FADE_DELAY * 15}>
+          <SpotifyStreaming />
+        </BlurFade>
       </div>
     </div>
   );
