@@ -1,9 +1,8 @@
 export const dynamic = "force-dynamic";
 
-import React, { Suspense } from "react";
+import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import Link from "next/link";
-import { getCurrentlyPlaying, getLastPlayedTrack } from "@/lib/actions";
 import { buttonVariants } from "./ui/button";
 import { cn } from "@/lib/utils";
 import { FileIcon, GlobeIcon } from "lucide-react";

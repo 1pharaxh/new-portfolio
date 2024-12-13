@@ -1,14 +1,11 @@
 export const dynamic = "force-dynamic";
 
-// Import required modules and constants
 import { NextResponse } from "next/server";
 
 // Route segment config
 export const runtime = "edge";
 
-export async function getAccessToken(
-  type: "last_played" | "currently_playing"
-): Promise<any> {
+async function getAccessToken(type: string) {
   try {
     let refresh_token;
     if (type === "last_played") {
@@ -29,6 +26,8 @@ export async function getAccessToken(
         ).toString("base64")}`,
         "Content-Type": "application/x-www-form-urlencoded",
       },
+      // get new access token using refresh token
+      // using URLSearchParams to send data in x-www-form-urlencoded format
       body: new URLSearchParams({
         grant_type: "refresh_token",
         refresh_token,
